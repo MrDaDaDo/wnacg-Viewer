@@ -9,4 +9,4 @@ Step1. You need Tampermonkey.
 - FireFox: [Tampermonkey](https://addons.mozilla.org/zh-TW/firefox/addon/tampermonkey/)
   
 Step2. Install script
-- Click [nHentai-Viewer.user.js](https://github.com/MrDaDaDo/wnacg-Viewer/raw/master/wnacg-Viewer.user.js) to install script.
+- Click [wnacg-Viewer.user.js](https://github.com/MrDaDaDo/wnacg-Viewer/blob/main/wnacg-Viewer.user.js) to install script.
