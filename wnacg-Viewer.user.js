@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        wnacg-Viewer
 // @description A wnacg-Viewer
-// @version     2.3
+// @version     2.5
 // @author      MrDaDaDo
 // @match       https://wnacg.com/*
 // @match       https://www.wnacg.com/*
@@ -48,23 +48,27 @@
 
         const $imgDiv = $('<div id="wnacg-viewer-img-list"></div>');
         $parent.append($imgDiv);
-
         const title = document.title.replace(' - 列表 - 紳士漫畫-專註分享漢化本子|邪惡漫畫', '');
-        const titleMatch = title.match(/^(.*?)\s*\[([^\[\]]+?)\]\s*(.*)$/);
-        const [prefix, author, restTitle] = titleMatch ? titleMatch.slice(1, 4) : [title, null, ''];
         const $titleDiv = $('<div id="wnacg-viewer-title" style="text-align:center;color:#999;padding-bottom:10px;font-size:26px;"></div>');
-
-        if (author) {
-            const $link = $(`<a href="https://www.wnacg.com/search/?q=${author}&f=_all&s=create_time_DESC&syn=yes" target="_blank" style="color: #4A90E2;">${author}</a>`);
-            $titleDiv.append(prefix).append(' [').append($link).append(`] ${restTitle}`);
-        } else {
-            $titleDiv.append(title);
+        const regex = /\[([^\[\]]+?)\]/g;
+        let lastIndex = 0;
+        let match;
+        while ((match = regex.exec(title)) !== null) {
+            if (match.index > lastIndex) {
+                $titleDiv.append(title.slice(lastIndex, match.index));
+            }
+            const searchKeyword = match[1];
+            const $link = $(`<a href="https://www.wnacg.com/search/?q=${searchKeyword}&f=_all&s=create_time_DESC&syn=yes" target="_blank" style="color: #4A90E2;">${searchKeyword}</a>`);
+            $titleDiv.append('[').append($link).append(']');
+            lastIndex = regex.lastIndex;
+        }
+        if (lastIndex < title.length) {
+            $titleDiv.append(title.slice(lastIndex));
         }
         $imgDiv.append($titleDiv);
 
         const batchSize = 10; // 每次載入的圖片數量
         let currentBatch = 0;
-
         const loadNextBatch = () => {
             const startIndex = currentBatch * batchSize;
             const endIndex = Math.min(startIndex + batchSize, imageSrcList.length);
