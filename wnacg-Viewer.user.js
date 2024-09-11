@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        wnacg-Viewer
 // @description A wnacg-Viewer
-// @version     2.6
+// @version     2.6.1
 // @author      MrDaDaDo
 // @match       https://wnacg.com/*
 // @match       https://www.wnacg.com/*
@@ -9,8 +9,8 @@
 // @require     https://code.jquery.com/jquery-3.3.1.min.js
 // @namespace   https://github.com/MrDaDaDo/wnacg-Viewer
 // @license     GPL-3.0-or-later
-// @downloadURL https://update.greasyfork.org/scripts/506140/wnacg-Viewer.user.js
-// @updateURL   https://update.greasyfork.org/scripts/506140/wnacg-Viewer.meta.js
+// @downloadURL https://github.com/MrDaDaDo/wnacg-Viewer/raw/main/wnacg-Viewer.user.js
+// @updateURL   https://github.com/MrDaDaDo/wnacg-Viewer/raw/main/wnacg-Viewer.user.js
 // ==/UserScript==
 
 (() => {
