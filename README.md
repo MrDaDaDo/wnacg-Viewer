@@ -1,6 +1,7 @@
 # wnacg Viewer
 - Pre-load all image automatic
 - Quickly Add/Remove from favorites
+
 # How to Use
 Step1. You need Tampermonkey.
 
