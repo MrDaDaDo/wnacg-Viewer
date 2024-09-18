@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        wnacg-Viewer
-// @description A wnacg-Viewer
-// @version     2.6.1
+// @description wnacg-Viewer 功能：1. 書架管理—快速加入/移除書架；2. 幻燈片模式—自動切換，優化圖片載入；3. 專輯鏈接自動更新—連結至下拉閱讀；4. 關鍵字搜尋—輕鬆查找相關作品。
+// @version     2.6.2
 // @author      MrDaDaDo
 // @match       https://wnacg.com/*
 // @match       https://www.wnacg.com/*
