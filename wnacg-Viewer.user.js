@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        wnacg-Viewer
-// @description A wnacg-Viewer
-// @version     2.6.1
+// @description wnacg-Viewer 功能：1. 書架管理—快速加入/移除書架；2. 幻燈片模式—自動切換，優化圖片載入；3. 專輯鏈接自動更新—連結至下拉閱讀；4. 關鍵字搜尋—輕鬆查找相關作品。
+// @version     2.7.0
 // @author      MrDaDaDo
 // @match       https://wnacg.com/*
 // @match       https://www.wnacg.com/*
@@ -11,10 +11,17 @@
 // @license     GPL-3.0-or-later
 // @downloadURL https://github.com/MrDaDaDo/wnacg-Viewer/raw/main/wnacg-Viewer.user.js
 // @updateURL   https://github.com/MrDaDaDo/wnacg-Viewer/raw/main/wnacg-Viewer.user.js
+// @resource     MY_CSS https://www.wnacg.com/themes/weitu/images/style.css
+// @grant        GM_getResourceText
+// @grant        GM_addStyle
 // ==/UserScript==
 
 (() => {
     const $ = window.jQuery;
+
+    const cssContent = GM_getResourceText("MY_CSS");
+
+    GM_addStyle(cssContent);
 
     const genFavBtnId = favId => `add-to-fav-btn-${favId}`;
 
@@ -98,14 +105,15 @@
 
     const genImageDivHtml = (imageSrc, index, total) => `
         <div style="text-align:center;color:#999;padding-bottom:10px;font-size:13px;">
-            <img src="${imageSrc}" width="960px"><br>
+            <img src="${imageSrc}" width="960px" style="display: inline"><br>
             <span>${index}/${total}</span>
         </div>
     `;
 
     const viewSlide = imageSrcList => {
-        $('#shareBox, #control_block, #mask_panel, #cite_vote, #page_scale, .header, .footer').remove();
-        const $parent = $('#img_list').parent();
+        $('#shareBox, #control_block, #mask_panel, #cite_vote, #page_scale, .header, .footer, #top-bar').remove();
+        const $parent = $('#v-container');
+        $parent[0].innerHTML = '';
         $('#img_list, #img_load').remove();
         const $favLabel = $('<label class="nav_list" style="display: block; text-align: center; margin: 0 auto;"></label>');
         $parent.append($favLabel);
@@ -166,6 +174,7 @@
     };
 
     const url = window.location.href;
+    console.log(url);
     if (url === 'https://www.wnacg.com/' || url.startsWith('https://www.wnacg.com/albums') || url.startsWith('https://www.wnacg.com/search')) {
         goAlbums();
     } else if (url.startsWith('https://www.wnacg.com/photos-slide-aid')) {
